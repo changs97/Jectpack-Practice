@@ -46,8 +46,8 @@ class MainFragment : Fragment() {
         * 있는지 확인한 후(isNotEmpty()) 있으면 ViewModel 인스턴스의 setAmount() 함수를 호출한다.
         * 그 다음에 ViewModel 인스턴스의 getResult() 함수를 호출하여 환전된 금액을 얻은 후 resultText TextView에
         * 지정하여 보여준다.
-        * 아직 LiveData를 사용하지 않았으므로 프래그먼트가 매번 생성될 때마다 ViewModel로부터
-        * 가장 최근 결과값을 가져와야 한다.*/
+        * 주석처리된 코드는 LiveData를 사용하지 않았으므로 프래그먼트가 매번 생성될 때마다 ViewModel로부터
+        * 가장 최근 결과값을 가져와야 한다. LiveData를 사용한 코드와 사용하지 않은 코드를 비교해보자.*/
 
         //binding.resultText.text = viewModel.getResult().toString() 아래 코드로 변경
 
@@ -64,6 +64,8 @@ class MainFragment : Fragment() {
         *
         * 아래 코드를 추가하면 LiveData 객체의 환전 결과 데이터가 변경될 때 바로 앞에서 구현한
         * resultObserver의 onChanged() 콜백 함수가 실행되어 resultText의 값이 변경된다.*/
+
+        //생성된 Observer 인스턴스는 LiveData의 observe() 함수 호출을 통해 LiveData 인스턴스에 연결
         viewModel.getResult().observe(viewLifecycleOwner, resultObserver)
 
         binding.run {

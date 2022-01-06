@@ -39,13 +39,13 @@ class MainViewModel : ViewModel() {
 
     이제는 result 변수가 MutableLiveData 인스턴스이므로 위에 두 함수도 수정해야 한다.
     setAmount() 함수의 경우는 result 변수에 값을 지정할 때 단순히 대입 연산자를 사용할 수 없다.
-    대신에 환전된 결과값을 인자로 전달하여 LiveData의 setValue() 함수를 호출해야 한다.
+    대신에 환전된 결과값을 인자로 전달하여 LiveData의 setValue() 함수를 호출해야 한다. -> (value로 변경)
     그리고 현재 getResult() 함수는 Float 값을 반환하므로 MutableLiveData 객체를 반환하도록 수정해야 한다.
      */
 
     fun setAmount(value : String) {
         this.dollarText = value
-        result.setValue(value.toFloat() * usd_to_eu_rate)
+        result.value = value.toFloat() * usd_to_eu_rate
     }
 
     fun getResult() : MutableLiveData<Float> {
