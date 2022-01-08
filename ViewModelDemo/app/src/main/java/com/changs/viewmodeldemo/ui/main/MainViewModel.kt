@@ -23,9 +23,10 @@ import androidx.lifecycle.ViewModel
 * 결과 데이터 값을 변경할 수 있어야 하기 때문이다.*/
 class MainViewModel : ViewModel() {
     private val usd_to_eu_rate = 0.74f
-    private var dollarText = ""
+    //private var dollarText = "" 데이터 바인딩 적용으로 주석 처리
     //private var result : Float = 0f , 아래 코드로 변경
-    private var result : MutableLiveData<Float> = MutableLiveData()
+    var dollarValue : MutableLiveData<String> = MutableLiveData()
+    var result : MutableLiveData<Float> = MutableLiveData()
 
     /*
     fun setAmount(value : String) {
@@ -43,12 +44,24 @@ class MainViewModel : ViewModel() {
     그리고 현재 getResult() 함수는 Float 값을 반환하므로 MutableLiveData 객체를 반환하도록 수정해야 한다.
      */
 
-    fun setAmount(value : String) {
+    //데이터 바인딩 적용으로 두 함수 주석 처리
+
+/*    fun setAmount(value : String) {
         this.dollarText = value
         result.value = value.toFloat() * usd_to_eu_rate
-    }
+    }*/
 
-    fun getResult() : MutableLiveData<Float> {
+/*    fun getResult() : MutableLiveData<Float> {
         return result
+    }*/
+
+    fun convertValue() {
+        dollarValue.let {
+            if (!it.value.equals("")) {
+                result.value = it.value?.toFloat()?.times(usd_to_eu_rate)
+            } else {
+                result.value = 0f
+            }
+        }
     }
 }
