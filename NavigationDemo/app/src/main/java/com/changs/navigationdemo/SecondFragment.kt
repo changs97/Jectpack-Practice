@@ -33,4 +33,5 @@ class SecondFragment : Fragment() {
     interface OnFragmentInteractionListener {
         fun onFragmentInteraction(uri : Uri)
     }
+    
 }
